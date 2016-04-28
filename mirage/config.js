@@ -13,6 +13,11 @@ export default function() {
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
   this.get('/decks');
+  this.post('/decks', ({deck}, request) => {
+    const params = JSON.parse(request.requestBody);
+    const newDeck = deck.create(params);
+    return newDeck;
+  });
   this.get('/slides');
   /*
     Shorthand cheatsheet:

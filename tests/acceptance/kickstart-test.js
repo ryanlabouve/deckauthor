@@ -8,5 +8,11 @@ test('visiting /kickstart', function(assert) {
 
   andThen(function() {
     assert.notEqual(currentURL(), '/');
+    const UUID_REGEX = /\/[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}/i;
+    assert.equal(
+      UUID_REGEX.test(currentURL()),
+      true,
+      'Should redirect to UUID'
+    );
   });
 });
