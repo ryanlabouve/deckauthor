@@ -3,7 +3,9 @@
     {{fa-icon icon="bars"}}
   </div>
   {{#each slides as |slide index|}}
-    <div class="p2 slide-list-li">
+    {{#link-to
+      'deck.slides.slide' slide.id
+      class="p2 slide-list-li"}}
       <hr>
       <div class="slide-content">
         {{slide.content}}
@@ -12,7 +14,7 @@
         {{slide.id}}
       </div>
       <hr>
-    </div>
+    {{/link-to}}
   {{/each}}
 
   <div class="border-top add-slide-button" onclick={{route-action "addSlide"}}>

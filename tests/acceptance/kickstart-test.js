@@ -68,4 +68,24 @@ test('visiting /kickstart', function(assert) {
       'should transition to new slide'
     );
   });
+
+
+  click('.slide-list-li:first');
+
+  andThen(function() {
+    const firstSlideId = find('.slide-list-li:first .slide-id').text().trim();
+    const slide = server.db.slides.find(firstSlideId);
+    const deck = server.db.decks.find(slide.deckId);
+    const deckUuid = deck.data.attributes.uuid;
+
+    assert.equal(
+      currentURL(),
+      `/${deckUuid}/slides/${firstSlideId}`,
+      'After clicking on first slide, we navigate to first slide'
+    );
+  });
+
+
+
+
 });
