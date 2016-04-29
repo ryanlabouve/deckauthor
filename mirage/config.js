@@ -12,13 +12,63 @@ export default function() {
   // this.namespace = '';    // make this `api`, for example, if your API is namespaced
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
-  this.get('/decks');
-  this.post('/decks', ({deck}, request) => {
+  this.get('/decks', ({ deck }, request) => {
+    const uuid = request.queryParams['filter[uuid]'];
+
+    let id;
+    deck.all().forEach((deck) => {
+      const testUuid = deck.attrs.data.attributes.uuid;
+      if(testUuid === uuid) {
+        id = deck.attrs.id;
+      }
+    });
+    return deck.where({id});
+  });
+
+  this.post('/decks', ({ deck, slide}, request) => {
     const params = JSON.parse(request.requestBody);
     const newDeck = deck.create(params);
+
+    const slideParams = {
+      data: {
+        attributes: {
+          content: '# new slide'
+        },
+        type: "slides",
+        "relationships": {
+          "data": {
+            id: newDeck.id,
+            type: "deck"
+          }
+        }
+      }
+    };
+
+    newDeck.createSlide(slideParams);
     return newDeck;
   });
-  this.get('/slides');
+
+  this.get('/slides', ({ slide }, request)  => {
+    const id = request.queryParams['filter[id]'];
+
+    let lookupId;
+    slide.all().forEach((slide) => {
+      const testId = slide.attrs.data.id;
+
+      if(testId === id) {
+        debugger;
+        lookupId = slide.attrs.id;
+      }
+    });
+    return slide.where({id: lookupId});
+  });
+
+  this.get('/slides/:id');
+
+  // this.get('/decks/:id/slides', () => {
+  //   debugger;
+  // });
+
   /*
     Shorthand cheatsheet:
 

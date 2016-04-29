@@ -19,7 +19,13 @@ module.exports = function(environment) {
     }
   };
 
+  ENV['ember-cli-mirage'] = {
+    enabled: false
+  };
+
   if (environment === 'development') {
+    ENV.host = 'http://localhost:3000';
+    // ENV.host = '/';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -28,9 +34,15 @@ module.exports = function(environment) {
   }
 
   if (environment === 'test') {
+    ENV.host = '/';
+    ENV['ember-cli-mirage'] = {
+      enabled: true
+    };
+
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'none';
+
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;

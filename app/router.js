@@ -6,7 +6,11 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('deck', { path: ':uuid' });
+  this.route('deck', { path: ':uuid' }, function() {
+    this.route('slides', function() {
+      this.route('slide', { path: ':id' });
+    });
+  });
 });
 
 export default Router;

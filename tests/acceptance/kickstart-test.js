@@ -14,5 +14,22 @@ test('visiting /kickstart', function(assert) {
       true,
       'Should redirect to UUID'
     );
+
+    const lastDeck = server.db.decks[server.db.decks.length -1];
+    const lastSlide = server.db.slides[server.db.slides.length-1];
+
+    assert.equal(
+      currentURL(),
+      `/${lastDeck.data.attributes.uuid}/slides/${lastSlide.id}`,
+      'Should redirect to the correct UUID'
+    );
+
+    assert.equal(
+      find('.current-slide-content').text().trim(),
+      lastSlide.data.attributes.content,
+      'We see the dummy slide content on screen'
+    );
+
+
   });
 });

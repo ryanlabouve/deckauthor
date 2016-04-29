@@ -8,6 +8,7 @@ export default Ember.Route.extend({
     });
 
     return deck.save().then((deck) => {
+      // debugger;
       this.transitionTo('deck', deck.get('uuid'));
     }, (error) => {
       Ember.assert(error);
