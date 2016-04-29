@@ -11,14 +11,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{edit-slide}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#edit-slide}}
-      template block text
-    {{/edit-slide}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('.edit-slide-component').length, 1);
 });

@@ -1,8 +1,11 @@
-<div class="edit-slide-container">
-  <p>
+<div class="edit-slide-container expanded p2">
+  <div class="edit-slide-menu" onclick={{action "toggleMenu"}}>
+    {{fa-icon icon="bars"}}
+  </div>
+  <p class="center">
     Edit Slide
   </p>
   {{textarea
     value=content
-    class="slide-content"}}
+    class="edit-slide-content"}}
 </div>

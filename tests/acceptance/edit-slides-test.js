@@ -22,18 +22,18 @@ test('visiting /edit-slides', function(assert) {
     );
 
     assert.equal(
-      find('.edit-slide-component .slide-content').length,
+      find('.edit-slide-component .edit-slide-content').length,
       1,
       'We can see an edit pane\'s edit textarea'
     );
 
     assert.equal(
-      find('.edit-slide-component .slide-content').val(),
+      find('.edit-slide-component .edit-slide-content').val(),
       lastSlide.content,
       'Edit text pane should have correct slide value'
     );
   });
-  fillIn('.edit-slide-component .slide-content', '# asdf')
+  fillIn('.edit-slide-component .edit-slide-content', '# asdf');
 
   andThen(function() {
     const convertor = new window.showdown.Converter();

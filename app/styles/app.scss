@@ -20,10 +20,32 @@ body {
 .edit-slide-container {
   position: absolute;
   top: 0;
-  right: 0;
+  right: -250px;
   width: 250px;
   height: 100vh;
   background: #ccc;
+}
+
+.edit-slide-container.expanded {
+  right: 0px;
+}
+
+.edit-slide-content {
+  width: 100%;
+  height: 40vh;
+}
+
+.edit-slide-menu {
+  position: absolute;
+  right: 100%;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #ccc;
+  cursor: pointer;
+  color: white;
 }
 
 
