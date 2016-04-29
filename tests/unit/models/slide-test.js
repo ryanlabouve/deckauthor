@@ -2,7 +2,7 @@ import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('slide', 'Unit | Model | slide', {
   // Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:deck']
 });
 
 test('it exists', function(assert) {
