@@ -29,22 +29,16 @@ export default function() {
     const params = JSON.parse(request.requestBody);
     const newDeck = deck.create(params);
 
-    const slideParams = {
+    newDeck.createSlide({
+      content: '# new slide',
       data: {
+        type: 'slides',
         attributes: {
           content: '# new slide'
-        },
-        type: "slides",
-        "relationships": {
-          "data": {
-            id: newDeck.id,
-            type: "deck"
-          }
         }
       }
-    };
+    });
 
-    newDeck.createSlide(slideParams);
     return newDeck;
   });
 
@@ -53,10 +47,9 @@ export default function() {
 
     let lookupId;
     slide.all().forEach((slide) => {
-      const testId = slide.attrs.data.id;
+      const testId = slide.attrs.id;
 
       if(testId === id) {
-        debugger;
         lookupId = slide.attrs.id;
       }
     });
