@@ -1,12 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model() {
-    const deck = this.modelFor('deck');
-    // debugger;
-    return deck.get('slides');
-  },
-
   afterModel(model) {
     // TODO transition to latest slide
     // debugger;
