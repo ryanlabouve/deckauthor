@@ -43,20 +43,29 @@ test('visiting /kickstart', function(assert) {
     );
 
     assert.equal(
-      find('.add-slide-component').length,
+      find('.add-slide-button').length,
       1,
       'There\'s a button to add slides'
     );
   });
 
-  const currentSlidesLength = server.db.slides.length;
   click('.add-slide-button');
 
   andThen(function() {
+    const s = server.db.slides;
+    const lastDeck = server.db.decks[server.db.decks.length -1];
+    const lastSlide = server.db.slides[server.db.slides.length-1];
     assert.equal(
-      server.db.slides.length,
-      currentSlidesLength + 1,
+      s.length,
+      // currentSlidesLength + 1,
+      2,
       'We added a slide!'
+    );
+
+    assert.equal(
+      currentURL(),
+      `/${lastDeck.data.attributes.uuid}/slides/${lastSlide.id}`,
+      'should transition to new slide'
     );
   });
 });

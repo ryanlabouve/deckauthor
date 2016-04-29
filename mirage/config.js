@@ -25,6 +25,8 @@ export default function() {
     return deck.where({id});
   });
 
+  this.post('/slides');
+
   this.post('/decks', ({ deck, slide}, request) => {
     const params = JSON.parse(request.requestBody);
     const newDeck = deck.create(params);
