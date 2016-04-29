@@ -33,16 +33,26 @@ test('visiting /edit-slides', function(assert) {
       'Edit text pane should have correct slide value'
     );
   });
+
   fillIn('.edit-slide-component .edit-slide-content', '# asdf');
+  triggerEvent('.edit-slide-component .edit-slide-content', 'keyup');
+
 
   andThen(function() {
     const convertor = new window.showdown.Converter();
     const dummyMdToHtml = convertor.makeHtml('# asdf');
+    const lastSlide = server.db.slides[server.db.slides.length-1];
 
     assert.equal(
       find('.current-slide-content .ember-view').html().trim(),
       dummyMdToHtml,
       'We see the dummy slide content on screen'
+    );
+
+    assert.equal(
+      lastSlide.content,
+      '# asdf',
+      'We have updated the slide\'s content'
     );
   });
 

@@ -59,7 +59,7 @@ export default function() {
   });
 
   this.get('/slides/:id');
-
+  this.patch('/slides/:id');
   // this.get('/decks/:id/slides', () => {
   //   debugger;
   // });

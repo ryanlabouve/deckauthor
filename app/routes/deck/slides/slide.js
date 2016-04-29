@@ -11,6 +11,18 @@ export default Ember.Route.extend({
     });
   },
 
+  actions: {
+    saveSlide(content) {
+      const m = this.modelFor('deck.slides.slide');
+      m.set('content', content);
+      m.save().then((m) => {
+        console.log('YEY. saved', m);
+      }, (error) => {
+        Ember.assert(error);
+      });
+    }
+  }
+
   // afterModel(model) {
   //   debugger;
   // }
