@@ -30,6 +30,33 @@ test('visiting /kickstart', function(assert) {
       'We see the dummy slide content on screen'
     );
 
+    assert.equal(
+      find('.slide-list-component').length,
+      1,
+      'We should see a list of slides'
+    );
 
+    assert.equal(
+      find('.slide-list-component .slide-list-li').length,
+      server.db.slides.length,
+      'We should see the right number of slides'
+    );
+
+    assert.equal(
+      find('.add-slide-component').length,
+      1,
+      'There\'s a button to add slides'
+    );
+  });
+
+  const currentSlidesLength = server.db.slides.length;
+  click('.add-slide-button');
+
+  andThen(function() {
+    assert.equal(
+      server.db.slides.length,
+      currentSlidesLength + 1,
+      'We added a slide!'
+    );
   });
 });

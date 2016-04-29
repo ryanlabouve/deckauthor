@@ -1,3 +1,39 @@
 body {
   font-family: 'Exo 2', sans-serif;
+  margin: 0;
+}
+
+
+.slide-list-container {
+  position: absolute;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100vh;
+  background: #ccc;
+}
+
+.slide-list-container.expanded {
+  left: 0px;
+}
+
+.slide-list-menu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #ccc;
+  cursor: pointer;
+  color: white;
+}
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
 }
