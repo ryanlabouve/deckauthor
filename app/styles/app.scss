@@ -17,6 +17,16 @@ body {
   left: 0px;
 }
 
+.edit-slide-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100vh;
+  background: #ccc;
+}
+
+
 .slide-list-menu {
   position: absolute;
   left: 100%;
