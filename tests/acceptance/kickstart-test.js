@@ -24,9 +24,19 @@ test('visiting /kickstart', function(assert) {
       'Should redirect to the correct UUID'
     );
 
+
     assert.equal(
-      find('.current-slide-content').text().trim(),
-      lastSlide.data.attributes.content,
+      typeof window.showdown,
+      'object',
+      'We are importing showdown'
+    );
+
+    const convertor = new window.showdown.Converter();
+    const dummyMdToHtml = convertor.makeHtml(lastSlide.data.attributes.content);
+
+    assert.equal(
+      find('.current-slide-content .ember-view').html().trim(),
+      dummyMdToHtml,
       'We see the dummy slide content on screen'
     );
 
