@@ -26,6 +26,14 @@ body {
   background: #ccc;
 }
 
+.current-slide-id {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 10px;
+  left: 0;
+}
+
 .edit-slide-container.expanded {
   right: 0px;
 }
