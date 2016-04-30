@@ -1,3 +1,5 @@
+import Ember from 'ember';
+
 export default function() {
 
   // These comments are here to help you get started. Feel free to delete them.
@@ -17,7 +19,9 @@ export default function() {
 
     let id;
     deck.all().forEach((deck) => {
-      const testUuid = deck.attrs.data.attributes.uuid;
+      const testUuid =
+        Ember.get(deck, 'attrs.data.attributes.uuid') ||
+        Ember.get(deck, 'attrs.uuid');
       if(testUuid === uuid) {
         id = deck.attrs.id;
       }
