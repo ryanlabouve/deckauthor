@@ -45,6 +45,7 @@
     "ember-route-action-helper": "0.3.1",
     "ember-uuid": "1.0.0",
     "ember-welcome-page": "^1.0.1",
-    "loader.js": "^4.0.1"
+    "loader.js": "^4.0.1",
+    "ui-navigator-service": "0.3.1"
   }
 }
