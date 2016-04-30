@@ -1,10 +1,31 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  routing: Ember.inject.service('-routing'),
+  slideControls: Ember.inject.service(),
+
+
+  didInsertElement() {
+    this.get('slideControls').connect({
+      fn: (data) => {
+        this.remoteNavigate(data);
+      }
+    });
+  },
+
+  willDestroyElement() {
+    this.get('slideControls').disconnect();
+  },
+
   didReceiveAttrs() {
     // debugger;
   },
+
+  remoteNavigate({slideId, routeName}) {
+    const c = this.grabDetails(this);
+    c.router.transitionTo(routeName, slideId);
+
+  },
+
   grabDetails(self) {
     const router = Ember.getOwner(self).lookup('router:main').router;
 
@@ -38,6 +59,11 @@ export default Ember.Component.extend({
         const newId = c.slidesMap[c.currentSlideIndex - 1];
         console.log('go to prev', newId);
         c.router.transitionTo(c.name, newId);
+
+        this.get('slideControls').command({
+          routeName: c.name,
+          slideId: newId
+        });
       }
     },
 
@@ -49,6 +75,11 @@ export default Ember.Component.extend({
 
         const newId = c.slidesMap[c.currentSlideIndex + 1];
         c.router.transitionTo(c.name, newId);
+
+        this.get('slideControls').command({
+          routeName: c.name,
+          slideId: newId
+        });
       }
     }
   }
