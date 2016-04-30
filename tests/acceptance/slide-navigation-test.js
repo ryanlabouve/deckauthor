@@ -14,21 +14,75 @@ test('navigating some slides', function(assert) {
     deckId: d.id
   });
 
-  const slide = lastSlide(server);
-  const url = slideUrl(server, slide);
-  visit(url);
+  const initialSlide = lastSlide(server);
+  const initialUrl = slideUrl(server, initialSlide);
 
-  // go next
-  // go prev
-  // cannot go prev below 0
-  // cannot exceed length
-  // does not freak out with one slide
-  // does not freak out with zero slides
+  visit(initialUrl);
+
   andThen(function() {
+    const slide = lastSlide(server);
+    const url = slideUrl(server, slide);
+
     assert.equal(
       currentURL(),
       url,
       'We can see the last slide first'
+    );
+  });
+
+  click('.prev-slide');
+  andThen(function() {
+    const slide = server.db.slides[3];
+    const url = slideUrl(server, slide);
+
+    assert.equal(
+      currentURL(),
+      url,
+      'We can go to the previous slide'
+    );
+  });
+
+  click('.next-slide');
+  andThen(function() {
+    const slide = server.db.slides[4];
+    const url = slideUrl(server, slide);
+
+    assert.equal(
+      currentURL(),
+      url,
+      'We can go to the next slide'
+    );
+  });
+
+  click('.next-slide');
+  andThen(function() {
+    const slide = server.db.slides[4];
+    const url = slideUrl(server, slide);
+
+    assert.equal(
+      currentURL(),
+      url,
+      'We cannot go past the last slide'
+    );
+  });
+
+  click('.prev-slide');
+  click('.prev-slide');
+  click('.prev-slide');
+  click('.prev-slide');
+  click('.prev-slide');
+  click('.prev-slide');
+  click('.prev-slide');
+  click('.prev-slide');
+
+  andThen(function() {
+    const slide = server.db.slides[0];
+    const url = slideUrl(server, slide);
+
+    assert.equal(
+      currentURL(),
+      url,
+      'We cannot go below the first slide'
     );
   });
 });
