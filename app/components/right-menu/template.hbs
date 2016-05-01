@@ -3,14 +3,22 @@
     {{fa-icon icon="bars"}}
   </div>
   <div class="right-menu-links">
-    <a href="#" {{action "show" 'edit-slide'}}>
-      Edit Slide
+    <a href="#"
+       class="right-menu-link"
+      {{action "show" 'edit-slide'}}>
+      {{fa-icon 'file-o'}}
+      <div class="right-menu-link__label">
+        Slide
+      </div>
     </a>
 
     <a href="#"
-      class='deck-config-link'
+      class='deck-config-link right-menu-link'
       {{action "show" 'deck-config'}}>
-      config deck
+      {{fa-icon 'files-o'}}
+      <div class="right-menu-link__label">
+        Deck
+      </div>
     </a>
   </div>
   {{component currentComponent
