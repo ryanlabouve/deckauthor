@@ -17,7 +17,7 @@ export default Ember.Service.extend({
     socket.on('connect', () => {
       this.set('fn', fn);
       socket.emit('register', {
-        presentationId: this.get('presentationId')
+        presentationId: p
       });
     }, this);
 

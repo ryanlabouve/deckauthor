@@ -1,9 +1,26 @@
 import Ember from 'ember';
+import { EKMixin, keyDown, getKey } from 'ember-keyboard';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(EKMixin, {
   slideControls: Ember.inject.service(),
 
+  activateKeyboard: Ember.on('init', function() {
+    this.set('keyboardActivated', true);
+  }),
 
+  keyboardNav: Ember.on(keyDown('ArrowLeft'), keyDown('ArrowRight'), function() {
+    const key = getKey(event);
+    switch (key) {
+      case 'ArrowLeft':
+        const prev = this.get('actions.prevSlide');
+        prev.apply(this);
+        break;
+      case 'ArrowRight':
+        const next = this.get('actions.nextSlide');
+        next.apply(this);
+        break;
+    }
+  }),
   didInsertElement() {
     this.get('slideControls').connect({
       fn: (data) => {

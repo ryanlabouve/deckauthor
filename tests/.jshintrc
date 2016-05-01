@@ -1,6 +1,8 @@
 {
   "predef": [
     "server",
+    "keyDown",
+    "keyUp",
     "document",
     "window",
     "location",
