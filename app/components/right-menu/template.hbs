@@ -1,0 +1,8 @@
+<div class="right-menu-container expanded p2">
+  <div class="right-menu" onclick={{action "toggleMenu"}}>
+    {{fa-icon icon="bars"}}
+  </div>
+  {{component 'edit-slide'
+    content=content
+    saveSlide=(route-action 'saveSlide')}}
+</div>
