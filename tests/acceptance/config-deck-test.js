@@ -30,26 +30,26 @@ test('That we can configure a deck', function(assert) {
     );
 
     assert.equal(
-      find('.deck-configuration-component').length,
+      find('.deck-config-component').length,
       0,
       'We cannot see the deck config component by default'
     );
 
     assert.equal(
-      find('.deck-configuration-link').length,
+      find('.deck-config-link').length,
       1,
       'We can see a link to open deck config'
     );
   });
 
-  click('.deck-configuration-link');
+  click('.deck-config-link');
 
 
   andThen(function() {
     assert.equal(
-      find('.deck-configuration-component').length,
+      find('.deck-config-component').length,
       1,
-      'We cannot see the deck config component by default'
+      'We can now see the deck config component'
     );
   });
 

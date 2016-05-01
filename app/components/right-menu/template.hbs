@@ -2,7 +2,18 @@
   <div class="right-menu" onclick={{action "toggleMenu"}}>
     {{fa-icon icon="bars"}}
   </div>
-  {{component 'edit-slide'
+  <div class="right-menu-links">
+    <a href="#" {{action "show" 'edit-slide'}}>
+      Edit Slide
+    </a>
+
+    <a href="#"
+      class='deck-config-link'
+      {{action "show" 'deck-config'}}>
+      config deck
+    </a>
+  </div>
+  {{component currentComponent
     content=content
     saveSlide=(route-action 'saveSlide')}}
 </div>
