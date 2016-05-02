@@ -46,11 +46,19 @@ test('That we can configure a deck', function(assert) {
 
 
   andThen(function() {
-    assert.equal(
-      find('.deck-config-component').length,
-      1,
-      'We can now see the deck config component'
-    );
+    ['.deck-config-component',
+      '.deck-config__title',
+      '.deck-config__theme'
+    ].forEach(function(selector) {
+
+      assert.equal(
+        find(selector).length,
+        1,
+        `We can now see the selector ${selector}`
+      );
+    });
+
+
   });
 
 });
