@@ -8,7 +8,7 @@ export default Ember.Component.extend(EKMixin, {
     this.set('keyboardActivated', true);
   }),
 
-  keyboardNav: Ember.on(keyDown('ArrowLeft'), keyDown('ArrowRight'), function() {
+  keyboardNav: Ember.on(keyDown('ArrowLeft'), keyDown('ArrowRight'), keyDown('ArrowUp'), keyDown('ArrowDown'), function() {
     const key = getKey(event);
     switch (key) {
       case 'ArrowLeft':
@@ -18,6 +18,14 @@ export default Ember.Component.extend(EKMixin, {
       case 'ArrowRight':
         const next = this.get('actions.nextSlide');
         next.apply(this);
+        break;
+      case 'ArrowUp':
+        const first = this.get('actions.firstSlide');
+        first.apply(this);
+        break;
+      case 'ArrowDown':
+        const last = this.get('actions.lastSlide');
+        last.apply(this);
         break;
     }
   }),
@@ -91,6 +99,38 @@ export default Ember.Component.extend(EKMixin, {
       if (c.currentSlideIndex + 1 < c.length) {
 
         const newId = c.slidesMap[c.currentSlideIndex + 1];
+        c.router.transitionTo(c.name, newId);
+
+        this.get('slideControls').command({
+          routeName: c.name,
+          slideId: newId
+        });
+      }
+    },
+
+    firstSlide() {
+      const c = this.get('grabDetails')(this);
+      // if you're not on the first element, get there!
+      // otherwise, yay
+      if (c.currentSlideIndex !== 0) {
+
+        const newId = c.slidesMap[0];
+        c.router.transitionTo(c.name, newId);
+
+        this.get('slideControls').command({
+          routeName: c.name,
+          slideId: newId
+        });
+      }
+    },
+
+    lastSlide() {
+      const c = this.get('grabDetails')(this);
+      // if you're not on the last element, get there!
+      // otherwise, yay
+      if (c.currentSlideIndex + 1 < c.length) {
+
+        const newId = c.slidesMap[c.length - 1];
         c.router.transitionTo(c.name, newId);
 
         this.get('slideControls').command({

@@ -166,4 +166,30 @@ test('navigating some slides', function(assert) {
       'We cannot go below the first slide'
     );
   });
+
+  keyDown('ArrowDown');
+
+  andThen(function () {
+    const slide = server.db.slides[4];
+    const url = slideUrl(server, slide);
+
+    assert.equal(
+      currentURL(),
+      url,
+      'We can go directly to the last slide'
+    );
+  });
+
+  keyDown('ArrowUp');
+
+  andThen(function () {
+    const slide = server.db.slides[0];
+    const url = slideUrl(server, slide);
+
+    assert.equal(
+      currentURL(),
+      url,
+      'We can go directly to the first slide'
+    );
+  });
 });
