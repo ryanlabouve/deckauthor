@@ -6,9 +6,6 @@ export default Ember.Component.extend({
     this.set('_content', this.get('content'));
   },
   actions: {
-    toggleMenu() {
-      this.$('.edit-slide-container').toggleClass('expanded');
-    },
     saveAndUpdate() {
       return this.attrs.saveSlide(this.get('_content'));
     }
